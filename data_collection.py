@@ -42,7 +42,7 @@ w.maximize()
 
 browser.get(transfermarkt_url)
 
-accept_button = safe_locate_on_screen(0.9, "accept.png")
+accept_button = safe_locate_on_screen(0.9, "./images/accept.png")
 pyautogui.click(accept_button)
 
 pyautogui.sleep(13)
@@ -100,9 +100,9 @@ for i in range(4):
     pyautogui.sleep(2)
 
     # close ad
-    close_button = safe_locate_on_screen(0.95, "close.png")
-    close_button2 = safe_locate_on_screen(0.95, "close2.png")
-    close_button3 = safe_locate_on_screen(0.95, "close3.png")
+    close_button = safe_locate_on_screen(0.95, "./images/close.png")
+    close_button2 = safe_locate_on_screen(0.95, "./images/close2.png")
+    close_button3 = safe_locate_on_screen(0.95, "./images/close3.png")
     if close_button is not None:
         pyautogui.click(close_button)
     if close_button2 is not None:
@@ -110,7 +110,7 @@ for i in range(4):
     if close_button3 is not None:
         pyautogui.click(close_button3)
 
-    pyautogui.sleep(10)
+    pyautogui.sleep(20)
 
 df = pd.DataFrame(datas)
 print(df)
