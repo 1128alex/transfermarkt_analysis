@@ -54,36 +54,52 @@ for i in range(4):
     rows = table.find_elements(By.TAG_NAME, "tr")
 
     for row in rows:
-        hauptlinks = row.find_elements(By.CLASS_NAME, "hauptlink")
-        if not hauptlinks:
-            continue
-        a_tags = hauptlinks[0].find_elements(By.TAG_NAME, "a")
-        if not a_tags:
-            continue
-        player_name = a_tags[0].text
-        print("player name: " + player_name, end=", ")
+        tds = row.find_elements(By.TAG_NAME, "td")
 
-        infos = row.find_elements(By.CLASS_NAME, "zentriert")
-        if not infos:
+        if len(tds) < 11:
             continue
-        club = infos[1].find_element(By.TAG_NAME, "a").get_attribute("title")
-        print("club: " + club, end="")
 
-        prices = row.find_elements(By.CLASS_NAME, "rechts")
-        if not prices:
-            continue
-        current_price = prices[0].text
-        percentage = prices[1].text
-        difference = prices[2].text
-        print("current price: " + current_price, end=", ")
-        print("percentage: " + percentage, end=", ")
-        print("difference: " + difference)
+        """
+        0: index        
+        1: second column       
+            2: image        
+            3: name        
+            4: position        
+        5: team
+        6: nationality 
+        7: age 
+        8: current market value 
+        9: change rate 
+        10: difference 
+        """
+
+        name = tds[3].find_element(By.TAG_NAME, "a").get_attribute("title")
+        position = tds[4].text
+        club = tds[5].find_element(By.TAG_NAME, "img").get_attribute("title")
+        nationality = tds[6].find_element(By.TAG_NAME, "img").get_attribute("title")
+        age = tds[7].text
+        current_value = tds[8].text
+        percentage = tds[9].text
+        difference = tds[10].text
+
+        # # test
+        # print("name:", name, end=", ")
+        # print("position:", position, end=", ")
+        # print("club:", club, end=", ")
+        # print("age:", age, end=", ")
+        # print("nationality:", nationality, end=", ")
+        # print("current_value:", current_value, end=", ")
+        # print("percentage:", percentage, end=", ")
+        # print("difference:", difference)
 
         datas.append(
             {
-                "player_name": player_name,
+                "player_name": name,
+                "position": position,
                 "club": club,
-                "current_price": current_price,
+                "nationality": nationality,
+                "age": age,
+                "current_value": current_value,
                 "percentage": percentage,
                 "difference": difference,
             }
